@@ -13,6 +13,7 @@ import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { Button } from '../ui/button';
 import { Plus } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -26,27 +27,29 @@ interface DashboardClientProps {
 export function DashboardClient({ overviewData, sensorData, maintenanceTasks, anomalies }: DashboardClientProps) {
     const layouts = {
         lg: [
-            { i: 'overview', x: 0, y: 0, w: 12, h: 1, static: true },
-            { i: 'sensor', x: 0, y: 1, w: 7, h: 2.5 },
-            { i: 'maintenance', x: 7, y: 1, w: 5, h: 2.5 },
-            { i: 'anomalies', x: 0, y: 3.5, w: 7, h: 2.2 },
-            { i: 'ingestion', x: 7, y: 3.5, w: 5, h: 2.2 },
+            { i: 'overview', x: 0, y: 0, w: 12, h: 1.2, static: true },
+            { i: 'sensor', x: 0, y: 1, w: 7, h: 3 },
+            { i: 'maintenance', x: 7, y: 1, w: 5, h: 3 },
+            { i: 'anomalies', x: 0, y: 4, w: 7, h: 2.5 },
+            { i: 'ingestion', x: 7, y: 4, w: 5, h: 2.5 },
         ],
         md: [
-            { i: 'overview', x: 0, y: 0, w: 12, h: 1, static: true },
-            { i: 'sensor', x: 0, y: 1, w: 7, h: 2.5 },
-            { i: 'maintenance', x: 7, y: 1, w: 5, h: 2.5 },
-            { i: 'anomalies', x: 0, y: 3.5, w: 7, h: 2.2 },
-            { i: 'ingestion', x: 7, y: 3.5, w: 5, h: 2.2 },
+            { i: 'overview', x: 0, y: 0, w: 12, h: 1.2, static: true },
+            { i: 'sensor', x: 0, y: 1, w: 7, h: 3 },
+            { i: 'maintenance', x: 7, y: 1, w: 5, h: 3 },
+            { i: 'anomalies', x: 0, y: 4, w: 7, h: 2.5 },
+            { i: 'ingestion', x: 7, y: 4, w: 5, h: 2.5 },
         ],
         sm: [
-            { i: 'overview', x: 0, y: 0, w: 1, h: 4, static: true },
-            { i: 'sensor', x: 0, y: 4, w: 1, h: 3 },
-            { i: 'maintenance', x: 0, y: 7, w: 1, h: 3 },
-            { i: 'anomalies', x: 0, y: 10, w: 1, h: 3 },
-            { i: 'ingestion', x: 0, y: 13, w: 1, h: 3 },
+            { i: 'overview', x: 0, y: 0, w: 1, h: 4.5, static: true },
+            { i: 'sensor', x: 0, y: 4.5, w: 1, h: 3 },
+            { i: 'maintenance', x: 0, y: 7.5, w: 1, h: 3 },
+            { i: 'anomalies', x: 0, y: 10.5, w: 1, h: 2.5 },
+            { i: 'ingestion', x: 0, y: 13, w: 1, h: 2.5 },
         ]
     };
+
+    const gridItemClasses = "h-full w-full";
 
     return (
         <div>
@@ -63,12 +66,13 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                 breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                 cols={{ lg: 12, md: 12, sm: 1, xs: 1, xxs: 1 }}
                 rowHeight={100}
-                containerPadding={[0, 0]}
+                containerPadding={[16, 16]}
+                margin={[16, 16]}
             >
                 <div key="overview" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <OverviewCards data={overviewData} />
                 </div>
-                <div key="sensor">
+                <div key="sensor" className={cn(gridItemClasses)}>
                     <Card className="h-full flex flex-col">
                         <CardHeader>
                             <CardTitle>Sensor Data</CardTitle>
@@ -79,7 +83,7 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                         </CardContent>
                     </Card>
                 </div>
-                <div key="maintenance">
+                <div key="maintenance" className={cn(gridItemClasses)}>
                      <Card className="h-full flex flex-col">
                         <CardHeader>
                             <CardTitle>Maintenance Schedule</CardTitle>
@@ -90,10 +94,10 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                         </CardContent>
                     </Card>
                 </div>
-                <div key="anomalies">
+                <div key="anomalies" className={cn(gridItemClasses)}>
                     <AnomalyList anomalies={anomalies} />
                 </div>
-                <div key="ingestion">
+                <div key="ingestion" className={cn(gridItemClasses)}>
                     <DataIngestion />
                 </div>
             </ResponsiveGridLayout>
