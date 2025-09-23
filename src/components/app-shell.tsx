@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Sidebar,
   SidebarContent,
@@ -11,8 +13,12 @@ import {
 import { Bot, Factory, LayoutDashboard, Settings, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
+import { usePathname } from 'next/navigation';
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const isActive = (path: string) => pathname === path;
+
   return (
     <SidebarProvider>
       <Sidebar>
@@ -27,7 +33,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive tooltip="Dashboard">
+              <SidebarMenuButton asChild isActive={isActive('/')} tooltip="Dashboard">
                 <Link href="/">
                   <LayoutDashboard />
                   Dashboard
@@ -43,8 +49,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="AI Insights">
-                <Link href="#">
+              <SidebarMenuButton asChild isActive={isActive('/ai-insights')} tooltip="AI Insights">
+                <Link href="/ai-insights">
                   <Bot />
                   AI Insights
                 </Link>
