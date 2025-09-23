@@ -6,8 +6,6 @@ import { SensorChart } from '@/components/dashboard/sensor-chart';
 import { MaintenanceSchedule } from '@/components/dashboard/maintenance-schedule';
 import { AnomalyList } from '@/components/dashboard/anomaly-list';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '../ui/button';
-import { Plus } from 'lucide-react';
 
 interface DashboardClientProps {
     overviewData: OverviewData;
@@ -22,16 +20,12 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
         <div>
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-                <Button>
-                    <Plus className="mr-2 h-4 w-4" />
-                    Add Widget
-                </Button>
             </div>
             <div className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                     <OverviewCards data={overviewData} />
                 </div>
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4">
                     <Card>
                         <CardHeader>
                             <CardTitle>Sensor Data</CardTitle>
