@@ -57,8 +57,7 @@ export function AiInsightsClient({ equipment }: AiInsightsClientProps) {
   };
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-      <Card className="lg:col-span-7">
+    <Card className="flex-1">
         <CardHeader>
           <CardTitle>Equipment Insight Generator</CardTitle>
           <CardDescription>
@@ -106,7 +105,6 @@ export function AiInsightsClient({ equipment }: AiInsightsClientProps) {
               </div>
             )}
         </CardContent>
-      </Card>
-    </div>
+    </Card>
   );
 }
