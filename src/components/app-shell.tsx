@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Database, Factory, LayoutDashboard, Settings, Upload, Wrench } from 'lucide-react';
+import { Bot, Database, Factory, LayoutDashboard, Settings, Upload, Wrench, ShieldAlert, Cpu } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -37,6 +37,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Link href="/">
                   <LayoutDashboard />
                   Dashboard
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={isActive('/equipment')} tooltip="Equipment">
+                <Link href="/equipment">
+                  <Cpu />
+                  Equipment
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={isActive('/anomalies')} tooltip="Anomalies">
+                <Link href="/anomalies">
+                  <ShieldAlert />
+                  Anomalies
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
