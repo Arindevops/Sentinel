@@ -54,6 +54,7 @@ export type AssetData = {
   fileName: string;
   createDate: string;
   equipmentId: string;
+  equipmentName: string;
   temperature: number;
   pressure: number;
   vibration: number;

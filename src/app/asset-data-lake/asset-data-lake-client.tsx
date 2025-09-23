@@ -45,8 +45,8 @@ export function AssetDataLakeClient({ data }: AssetDataLakeClientProps) {
           <TableHeader>
             <TableRow>
               <TableHead>File Name</TableHead>
+              <TableHead>Equipment</TableHead>
               <TableHead>Create Date</TableHead>
-              <TableHead>Equipment ID</TableHead>
               <TableHead className="text-right">Temperature (°F)</TableHead>
               <TableHead className="text-right">Pressure (PSI)</TableHead>
               <TableHead className="text-right">Vibration (g)</TableHead>
@@ -57,9 +57,12 @@ export function AssetDataLakeClient({ data }: AssetDataLakeClientProps) {
               <TableRow key={row.id}>
                 <TableCell className="font-medium">{row.fileName}</TableCell>
                 <TableCell>
+                  <div className="font-medium">{row.equipmentName}</div>
+                  <div className="text-xs text-muted-foreground">{row.equipmentId}</div>
+                </TableCell>
+                <TableCell>
                   <ClientFormattedDate timestamp={row.createDate} />
                 </TableCell>
-                <TableCell>{row.equipmentId}</TableCell>
                 <TableCell className="text-right">{row.temperature.toFixed(2)}</TableCell>
                 <TableCell className="text-right">{row.pressure.toFixed(2)}</TableCell>
                 <TableCell className="text-right">{row.vibration.toFixed(3)}</TableCell>
