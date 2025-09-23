@@ -26,12 +26,26 @@ interface DashboardClientProps {
 export function DashboardClient({ overviewData, sensorData, maintenanceTasks, anomalies }: DashboardClientProps) {
     const layouts = {
         lg: [
-            { i: 'overview', x: 0, y: 0, w: 4, h: 1 },
-            { i: 'sensor', x: 0, y: 1, w: 4, h: 2 },
-            { i: 'maintenance', x: 4, y: 1, w: 3, h: 2 },
-            { i: 'anomalies', x: 0, y: 3, w: 7, h: 2 },
-            { i: 'ingestion', x: 4, y: 3, w: 7, h: 2 }
+            { i: 'overview', x: 0, y: 0, w: 12, h: 1 },
+            { i: 'sensor', x: 0, y: 1, w: 7, h: 2.5 },
+            { i: 'maintenance', x: 7, y: 1, w: 5, h: 2.5 },
+            { i: 'anomalies', x: 0, y: 3.5, w: 7, h: 2.2 },
+            { i: 'ingestion', x: 7, y: 3.5, w: 5, h: 2.2 },
         ],
+        md: [
+            { i: 'overview', x: 0, y: 0, w: 12, h: 1 },
+            { i: 'sensor', x: 0, y: 1, w: 7, h: 2.5 },
+            { i: 'maintenance', x: 7, y: 1, w: 5, h: 2.5 },
+            { i: 'anomalies', x: 0, y: 3.5, w: 7, h: 2.2 },
+            { i: 'ingestion', x: 7, y: 3.5, w: 5, h: 2.2 },
+        ],
+        sm: [
+            { i: 'overview', x: 0, y: 0, w: 1, h: 4 },
+            { i: 'sensor', x: 0, y: 4, w: 1, h: 3 },
+            { i: 'maintenance', x: 0, y: 7, w: 1, h: 3 },
+            { i: 'anomalies', x: 0, y: 10, w: 1, h: 3 },
+            { i: 'ingestion', x: 0, y: 13, w: 1, h: 3 },
+        ]
     };
 
     return (
@@ -47,30 +61,31 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                 className="layout"
                 layouts={layouts}
                 breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-                cols={{ lg: 7, md: 7, sm: 1, xs: 1, xxs: 1 }}
-                rowHeight={150}
+                cols={{ lg: 12, md: 12, sm: 1, xs: 1, xxs: 1 }}
+                rowHeight={100}
+                containerPadding={[0, 0]}
             >
-                <div key="overview" className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div key="overview">
                     <OverviewCards data={overviewData} />
                 </div>
                 <div key="sensor">
-                    <Card className="h-full">
+                    <Card className="h-full flex flex-col">
                         <CardHeader>
                             <CardTitle>Sensor Data</CardTitle>
                             <CardDescription>Live sensor readings from active equipment.</CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="flex-grow">
                             <SensorChart data={sensorData} />
                         </CardContent>
                     </Card>
                 </div>
                 <div key="maintenance">
-                    <Card className="h-full">
+                     <Card className="h-full flex flex-col">
                         <CardHeader>
                             <CardTitle>Maintenance Schedule</CardTitle>
                             <CardDescription>Upcoming maintenance tasks for your fleet.</CardDescription>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="flex-grow">
                             <MaintenanceSchedule tasks={maintenanceTasks} />
                         </CardContent>
                     </Card>

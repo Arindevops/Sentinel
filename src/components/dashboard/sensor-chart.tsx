@@ -30,8 +30,8 @@ const chartConfig = {
 
 export function SensorChart({ data }: SensorChartProps) {
   return (
-    <ChartContainer config={chartConfig} className="h-[250px] w-full">
-      <LineChart data={data} margin={{ left: 12, right: 12, top: 5, bottom: 5 }}>
+    <ChartContainer config={chartConfig} className="h-full w-full">
+      <LineChart data={data} margin={{ left: 0, right: 0, top: 5, bottom: 5 }}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="timestamp"

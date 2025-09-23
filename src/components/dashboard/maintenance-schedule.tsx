@@ -9,6 +9,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import type { MaintenanceTask } from '@/lib/types';
 import { formatDistanceToNow } from 'date-fns';
+import { ScrollArea } from '../ui/scroll-area';
 
 interface MaintenanceScheduleProps {
   tasks: MaintenanceTask[];
@@ -32,7 +33,7 @@ export function MaintenanceSchedule({ tasks }: MaintenanceScheduleProps) {
     .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
 
   return (
-    <div className="h-[300px] overflow-y-auto">
+    <ScrollArea className="h-full">
       <Table>
         <TableHeader>
           <TableRow>
@@ -62,6 +63,6 @@ export function MaintenanceSchedule({ tasks }: MaintenanceScheduleProps) {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </ScrollArea>
   );
 }
