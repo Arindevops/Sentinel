@@ -65,39 +65,31 @@ export function AnomalyList({ anomalies }: AnomalyListProps) {
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Anomalies</CardTitle>
-          <CardDescription>Anomalies detected in the last 72 hours.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ScrollArea className="h-[200px]">
-            <div className="space-y-4">
-              {anomalies.map((anomaly) => (
-                <div key={anomaly.id} className="flex items-center">
-                  <AlertTriangle className="h-5 w-5 text-destructive mr-4" />
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      {anomaly.equipmentName}
-                    </p>
-                    <p className="text-sm text-muted-foreground">{anomaly.description}</p>
-                    <p className="text-xs text-muted-foreground">
-                      <ClientFormattedDate timestamp={anomaly.timestamp} />
-                    </p>
-                  </div>
-                   <Badge variant={priorityVariant[anomaly.severity]} className="capitalize mr-4">
-                    {anomaly.severity}
-                  </Badge>
-                  <Button variant="ghost" size="icon" onClick={() => handleExplainClick(anomaly)}>
-                    <FileQuestion className="h-4 w-4" />
-                    <span className="sr-only">Explain Anomaly</span>
-                  </Button>
-                </div>
-              ))}
+      <ScrollArea className="h-[200px]">
+        <div className="space-y-4">
+          {anomalies.map((anomaly) => (
+            <div key={anomaly.id} className="flex items-center">
+              <AlertTriangle className="h-5 w-5 text-destructive mr-4" />
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium leading-none">
+                  {anomaly.equipmentName}
+                </p>
+                <p className="text-sm text-muted-foreground">{anomaly.description}</p>
+                <p className="text-xs text-muted-foreground">
+                  <ClientFormattedDate timestamp={anomaly.timestamp} />
+                </p>
+              </div>
+               <Badge variant={priorityVariant[anomaly.severity]} className="capitalize mr-4">
+                {anomaly.severity}
+              </Badge>
+              <Button variant="ghost" size="icon" onClick={() => handleExplainClick(anomaly)}>
+                <FileQuestion className="h-4 w-4" />
+                <span className="sr-only">Explain Anomaly</span>
+              </Button>
             </div>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+          ))}
+        </div>
+      </ScrollArea>
 
       <Dialog open={!!selectedAnomaly} onOpenChange={(open) => !open && setSelectedAnomaly(null)}>
         <DialogContent>
