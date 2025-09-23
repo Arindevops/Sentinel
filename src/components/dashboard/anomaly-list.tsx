@@ -23,6 +23,16 @@ interface AnomalyListProps {
   anomalies: Anomaly[];
 }
 
+const ClientFormattedDate = ({ timestamp }: { timestamp: string }) => {
+  const [formattedDate, setFormattedDate] = React.useState('');
+
+  React.useEffect(() => {
+    setFormattedDate(format(new Date(timestamp), 'PPpp'));
+  }, [timestamp]);
+
+  return <>{formattedDate}</>;
+};
+
 export function AnomalyList({ anomalies }: AnomalyListProps) {
   const [selectedAnomaly, setSelectedAnomaly] = React.useState<Anomaly | null>(null);
   const [explanation, setExplanation] = React.useState<string | null>(null);
@@ -72,7 +82,7 @@ export function AnomalyList({ anomalies }: AnomalyListProps) {
                     </p>
                     <p className="text-sm text-muted-foreground">{anomaly.description}</p>
                     <p className="text-xs text-muted-foreground">
-                      {format(new Date(anomaly.timestamp), 'PPpp')}
+                      <ClientFormattedDate timestamp={anomaly.timestamp} />
                     </p>
                   </div>
                    <Badge variant={priorityVariant[anomaly.severity]} className="capitalize mr-4">
