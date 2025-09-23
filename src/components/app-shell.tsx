@@ -41,8 +41,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Maintenance">
-                <Link href="#">
+              <SidebarMenuButton asChild isActive={isActive('/maintenance')} tooltip="Maintenance">
+                <Link href="/maintenance">
                   <Wrench />
                   Maintenance
                 </Link>
