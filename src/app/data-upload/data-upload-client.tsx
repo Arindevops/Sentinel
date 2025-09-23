@@ -8,7 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { handleFileUpload } from '@/app/actions';
 import { Loader2, Upload, FileCheck2 } from 'lucide-react';
 
-export function DataIngestion() {
+export function DataUploadClient() {
   const [file, setFile] = React.useState<File | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [analysisResult, setAnalysisResult] = React.useState<string | null>(null);
@@ -96,6 +96,12 @@ export function DataIngestion() {
                 <p className="text-sm text-muted-foreground">{analysisResult}</p>
               </div>
             </div>
+          </div>
+        )}
+         {isLoading && !analysisResult && (
+          <div className="flex items-center justify-center p-8">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="ml-2 text-muted-foreground">Analyzing your data...</p>
           </div>
         )}
       </CardContent>

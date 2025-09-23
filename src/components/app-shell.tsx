@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Database, Factory, LayoutDashboard, Settings, Wrench } from 'lucide-react';
+import { Bot, Database, Factory, LayoutDashboard, Settings, Upload, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -55,6 +55,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   Asset Data Lake
                 </Link>
               </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive('/data-upload')} tooltip="Data Upload">
+                    <Link href="/data-upload">
+                        <Upload />
+                        Data Upload
+                    </Link>
+                </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild isActive={isActive('/ai-insights')} tooltip="AI Insights">

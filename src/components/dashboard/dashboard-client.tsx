@@ -5,7 +5,6 @@ import { OverviewCards } from '@/components/dashboard/overview-cards';
 import { SensorChart } from '@/components/dashboard/sensor-chart';
 import { MaintenanceSchedule } from '@/components/dashboard/maintenance-schedule';
 import { AnomalyList } from '@/components/dashboard/anomaly-list';
-import { DataIngestion } from '@/components/dashboard/data-ingestion';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '../ui/button';
 import { Plus } from 'lucide-react';
@@ -32,7 +31,7 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                     <OverviewCards data={overviewData} />
                 </div>
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                     <Card>
                         <CardHeader>
                             <CardTitle>Sensor Data</CardTitle>
@@ -52,8 +51,8 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                         </CardContent>
                     </Card>
                 </div>
-                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                    <Card className="col-span-4">
+                 <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-1">
+                    <Card>
                         <CardHeader>
                             <CardTitle>Recent Anomalies</CardTitle>
                             <CardDescription>Anomalies detected in the last 72 hours.</CardDescription>
@@ -61,9 +60,6 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                         <CardContent>
                             <AnomalyList anomalies={anomalies} />
                         </CardContent>
-                    </Card>
-                    <Card className="col-span-3">
-                        <DataIngestion />
                     </Card>
                 </div>
             </div>
