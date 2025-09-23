@@ -1,4 +1,4 @@
-import type { Equipment, SensorDataPoint, MaintenanceTask, Anomaly, OverviewData } from './types';
+import type { Equipment, SensorDataPoint, MaintenanceTask, Anomaly, OverviewData, AssetData } from './types';
 import { subDays, format, addDays } from 'date-fns';
 
 const now = new Date();
@@ -134,6 +134,37 @@ const maintenanceTasks: MaintenanceTask[] = [
   },
 ];
 
+const assetData: AssetData[] = [
+  {
+    id: 'AD-001',
+    fileName: 'sensor-batch-q1.xlsx',
+    createDate: subDays(now, 10).toISOString(),
+    equipmentId: 'EQP-001',
+    temperature: 82.5,
+    pressure: 121.3,
+    vibration: 0.55,
+  },
+  {
+    id: 'AD-002',
+    fileName: 'sensor-batch-q1.xlsx',
+    createDate: subDays(now, 10).toISOString(),
+    equipmentId: 'EQP-002',
+    temperature: 90.1,
+    pressure: 130.0,
+    vibration: 0.95,
+  },
+  {
+    id: 'AD-003',
+    fileName: 'sensor-batch-q2-prelim.xlsx',
+    createDate: subDays(now, 2).toISOString(),
+    equipmentId: 'EQP-003',
+    temperature: 76.0,
+    pressure: 119.5,
+    vibration: 0.48,
+  },
+];
+
+
 export async function getEquipment(): Promise<Equipment[]> {
   return equipment;
 }
@@ -157,4 +188,8 @@ export async function getOverviewData(): Promise<OverviewData> {
     pendingMaintenance: maintenanceTasks.filter((t) => t.status === 'pending').length,
     predictedFailures: equipment.filter((e) => e.failurePrediction > 0.75).length,
   };
+}
+
+export async function getAssetData(): Promise<AssetData[]> {
+  return assetData;
 }

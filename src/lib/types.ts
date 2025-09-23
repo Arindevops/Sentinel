@@ -48,3 +48,13 @@ export type OverviewData = {
   pendingMaintenance: number;
   predictedFailures: number;
 };
+
+export type AssetData = {
+  id: string;
+  fileName: string;
+  createDate: string;
+  equipmentId: string;
+  temperature: number;
+  pressure: number;
+  vibration: number;
+};

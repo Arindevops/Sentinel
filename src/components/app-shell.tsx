@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Factory, LayoutDashboard, Settings, Wrench } from 'lucide-react';
+import { Bot, Database, Factory, LayoutDashboard, Settings, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -45,6 +45,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Link href="/maintenance">
                   <Wrench />
                   Maintenance
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={isActive('/asset-data-lake')} tooltip="Asset Data Lake">
+                <Link href="/asset-data-lake">
+                  <Database />
+                  Asset Data Lake
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
