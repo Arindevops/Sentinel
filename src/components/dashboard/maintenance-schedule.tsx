@@ -1,3 +1,7 @@
+
+'use client';
+
+import * as React from 'react';
 import {
   Table,
   TableBody,
@@ -15,18 +19,22 @@ interface MaintenanceScheduleProps {
   tasks: MaintenanceTask[];
 }
 
+const ClientFormattedDate = ({ timestamp }: { timestamp: string }) => {
+  const [formattedDate, setFormattedDate] = React.useState('');
+
+  React.useEffect(() => {
+    setFormattedDate(formatDistanceToNow(new Date(timestamp), { addSuffix: true }));
+  }, [timestamp]);
+
+  return <>{formattedDate}</>;
+};
+
 export function MaintenanceSchedule({ tasks }: MaintenanceScheduleProps) {
   const priorityVariant: Record<MaintenanceTask['priority'], 'destructive' | 'secondary' | 'default'> = {
     high: 'destructive',
     medium: 'secondary',
     low: 'default',
   };
-
-  const statusVariant: Record<MaintenanceTask['status'], 'destructive' | 'secondary' | 'default'> = {
-    pending: 'secondary',
-    'in-progress': 'default',
-    completed: 'default',
-  }
 
   const upcomingTasks = tasks
     .filter((task) => task.status !== 'completed')
@@ -52,7 +60,7 @@ export function MaintenanceSchedule({ tasks }: MaintenanceScheduleProps) {
               </TableCell>
               <TableCell>{task.task}</TableCell>
               <TableCell>
-                {formatDistanceToNow(new Date(task.dueDate), { addSuffix: true })}
+                <ClientFormattedDate timestamp={task.dueDate} />
               </TableCell>
               <TableCell className="text-right">
                 <Badge variant={priorityVariant[task.priority]} className="capitalize">
