@@ -1,11 +1,13 @@
 'use client';
 
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Line, LineChart, Legend } from 'recharts';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   ChartConfig,
+  ChartLegend,
+  ChartLegendContent,
 } from '@/components/ui/chart';
 import type { SensorDataPoint } from '@/lib/types';
 
@@ -31,7 +33,7 @@ const chartConfig = {
 export function SensorChart({ data }: SensorChartProps) {
   return (
     <ChartContainer config={chartConfig} className="h-full w-full">
-      <LineChart data={data} margin={{ left: 0, right: 0, top: 5, bottom: 5 }}>
+      <LineChart data={data} margin={{ left: 12, right: 12, top: 5, bottom: 5 }}>
         <CartesianGrid vertical={false} />
         <XAxis
           dataKey="timestamp"
@@ -47,6 +49,7 @@ export function SensorChart({ data }: SensorChartProps) {
           tickMargin={8}
           tickCount={6}
           domain={['dataMin - 10', 'dataMax + 10']}
+          tickFormatter={(value) => `${value.toFixed(0)}`}
         />
         <YAxis
           yAxisId="right"
@@ -56,8 +59,11 @@ export function SensorChart({ data }: SensorChartProps) {
           tickMargin={8}
           tickCount={6}
           domain={[0, 'dataMax + 0.5']}
+          tickFormatter={(value) => `${value.toFixed(1)}`}
+          label={{ value: 'Vibration (g)', angle: -90, position: 'insideRight', offset: 10, style: { textAnchor: 'middle' } }}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+        <Legend content={<ChartLegendContent />} />
         <Line
           dataKey="temperature"
           type="monotone"
@@ -65,6 +71,7 @@ export function SensorChart({ data }: SensorChartProps) {
           strokeWidth={2}
           dot={false}
           yAxisId="left"
+          name="Temperature"
         />
         <Line
           dataKey="pressure"
@@ -73,6 +80,7 @@ export function SensorChart({ data }: SensorChartProps) {
           strokeWidth={2}
           dot={false}
           yAxisId="left"
+          name="Pressure"
         />
         <Line
           dataKey="vibration"
@@ -81,6 +89,7 @@ export function SensorChart({ data }: SensorChartProps) {
           strokeWidth={2}
           dot={false}
           yAxisId="right"
+          name="Vibration"
         />
       </LineChart>
     </ChartContainer>
