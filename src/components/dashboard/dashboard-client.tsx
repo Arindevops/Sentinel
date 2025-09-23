@@ -32,8 +32,8 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                     <OverviewCards data={overviewData} />
                 </div>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                    <Card className="col-span-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <Card>
                         <CardHeader>
                             <CardTitle>Sensor Data</CardTitle>
                             <CardDescription>Live sensor readings from active equipment.</CardDescription>
@@ -42,7 +42,7 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                              <SensorChart data={sensorData} />
                         </CardContent>
                     </Card>
-                    <Card className="col-span-3">
+                    <Card>
                         <CardHeader>
                             <CardTitle>Maintenance Schedule</CardTitle>
                             <CardDescription>Upcoming maintenance tasks for your fleet.</CardDescription>
