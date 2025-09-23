@@ -12,14 +12,23 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { Factory } from 'lucide-react';
 
 const avatarImage = PlaceHolderImages.find((img) => img.id === 'user-avatar');
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm md:justify-end">
-      <div className="md:hidden">
-        <SidebarTrigger />
+    <header className="sticky top-0 z-10 flex h-16 items-center justify-between border-b bg-background/80 px-4 backdrop-blur-sm">
+       <div className="flex items-center gap-4">
+        <div className="md:hidden">
+          <SidebarTrigger />
+        </div>
+        <div className="hidden items-center gap-2 md:flex">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <Factory className="h-6 w-6" />
+          </div>
+          <h1 className="text-lg font-semibold text-primary">Data Centre Sentinel</h1>
+        </div>
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

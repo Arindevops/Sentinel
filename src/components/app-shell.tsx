@@ -22,13 +22,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <Sidebar>
-        <SidebarHeader className="p-2 transition-transform duration-300 group-data-[collapsible=icon]:-translate-x-8">
-          <div className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Factory className="h-6 w-6" />
-            </div>
-            <h1 className="text-lg font-semibold text-primary">Data Centre Sentinel</h1>
-          </div>
+        <SidebarHeader className="p-4 transition-transform duration-300 group-data-[collapsible=icon]:-translate-x-16">
+            <h1 className="text-lg font-semibold text-primary">Navigation Pane</h1>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
