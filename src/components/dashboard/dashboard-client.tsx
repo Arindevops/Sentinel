@@ -26,21 +26,21 @@ interface DashboardClientProps {
 export function DashboardClient({ overviewData, sensorData, maintenanceTasks, anomalies }: DashboardClientProps) {
     const layouts = {
         lg: [
-            { i: 'overview', x: 0, y: 0, w: 12, h: 1 },
+            { i: 'overview', x: 0, y: 0, w: 12, h: 1, static: true },
             { i: 'sensor', x: 0, y: 1, w: 7, h: 2.5 },
             { i: 'maintenance', x: 7, y: 1, w: 5, h: 2.5 },
             { i: 'anomalies', x: 0, y: 3.5, w: 7, h: 2.2 },
             { i: 'ingestion', x: 7, y: 3.5, w: 5, h: 2.2 },
         ],
         md: [
-            { i: 'overview', x: 0, y: 0, w: 12, h: 1 },
+            { i: 'overview', x: 0, y: 0, w: 12, h: 1, static: true },
             { i: 'sensor', x: 0, y: 1, w: 7, h: 2.5 },
             { i: 'maintenance', x: 7, y: 1, w: 5, h: 2.5 },
             { i: 'anomalies', x: 0, y: 3.5, w: 7, h: 2.2 },
             { i: 'ingestion', x: 7, y: 3.5, w: 5, h: 2.2 },
         ],
         sm: [
-            { i: 'overview', x: 0, y: 0, w: 1, h: 4 },
+            { i: 'overview', x: 0, y: 0, w: 1, h: 4, static: true },
             { i: 'sensor', x: 0, y: 4, w: 1, h: 3 },
             { i: 'maintenance', x: 0, y: 7, w: 1, h: 3 },
             { i: 'anomalies', x: 0, y: 10, w: 1, h: 3 },
@@ -65,7 +65,7 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                 rowHeight={100}
                 containerPadding={[0, 0]}
             >
-                <div key="overview">
+                <div key="overview" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <OverviewCards data={overviewData} />
                 </div>
                 <div key="sensor">
