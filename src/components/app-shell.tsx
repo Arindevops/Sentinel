@@ -21,7 +21,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Factory className="h-6 w-6" />
             </div>
-            <h1 className="text-lg font-semibold text-primary">Industrial Sentinel</h1>
+            <h1 className="text-lg font-semibold text-primary">Data Centre Sentinel</h1>
           </div>
         </SidebarHeader>
         <SidebarContent>
