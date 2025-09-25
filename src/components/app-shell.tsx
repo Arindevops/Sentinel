@@ -67,10 +67,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 return (
                     <SidebarMenuItem key={item.href}>
                         <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.tooltip}>
-                        <Link href={item.href} className="flex items-center">
+                        <Link href={item.href} className="flex items-center gap-2">
                             <Icon />
-                            <span>{item.label}</span>
-                            {item.isAI && <Sparkles className="ml-auto h-4 w-4 text-accent" />}
+                            <div className="flex items-center gap-2">
+                              <span>{item.label}</span>
+                              {item.isAI && <Sparkles className="h-4 w-4 text-accent" />}
+                            </div>
                         </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
