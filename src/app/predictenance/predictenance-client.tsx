@@ -224,11 +224,11 @@ export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
                   <div className="grid grid-cols-2 gap-4">
                      <div>
                         <Label>Priority</Label>
-                        <p className="text-sm font-medium capitalize">
+                        <div className="text-sm font-medium capitalize">
                           <Badge variant={priorityVariant[changeRequestTask.priority]}>
                             {changeRequestTask.priority}
                           </Badge>
-                        </p>
+                        </div>
                      </div>
 
                       <FormField

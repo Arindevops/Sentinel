@@ -207,11 +207,11 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
                   <div className="grid grid-cols-2 gap-4">
                      <div>
                         <Label>Priority</Label>
-                        <p className="text-sm font-medium capitalize">
+                        <div className="text-sm font-medium capitalize">
                           <Badge variant={priorityVariant[incidentAnomaly.severity]}>
                             {incidentAnomaly.severity}
                           </Badge>
-                        </p>
+                        </div>
                      </div>
 
                       <FormField
