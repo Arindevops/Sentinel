@@ -35,6 +35,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'icons.iconarchive.com',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
   experimental: {
