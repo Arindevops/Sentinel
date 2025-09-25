@@ -28,7 +28,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/')} tooltip="Dashboard">
+              <SidebarMenuButton asChild isActive={isActive('/')} tooltip="Dashboard" className={isActive('/') ? 'bg-accent text-accent-foreground' : ''}>
                 <Link href="/">
                   <LayoutDashboard />
                   Dashboard
@@ -36,10 +36,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </SidebarMenuButton>
             </SidebarMenuItem>
              <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/equipment')} tooltip="Equipment">
-                <Link href="/equipment">
-                  <Cpu />
-                  Equipment
+              <SidebarMenuButton asChild isActive={isActive('/ai-insights')} tooltip="AI Insights">
+                <Link href="/ai-insights">
+                  <Bot />
+                  AI Insights
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -52,20 +52,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/maintenance')} tooltip="Maintenance">
-                <Link href="/maintenance">
-                  <Wrench />
-                  Maintenance
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/asset-data-lake')} tooltip="Asset Data Lake">
+                <SidebarMenuButton asChild isActive={isActive('/asset-data-lake')} tooltip="Asset Data Lake">
                 <Link href="/asset-data-lake">
-                  <Database />
-                  Asset Data Lake
+                    <Database />
+                    Asset Data Lake
                 </Link>
-              </SidebarMenuButton>
+                </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive('/data-upload')} tooltip="Data Upload">
@@ -76,10 +68,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/ai-insights')} tooltip="AI Insights">
-                <Link href="/ai-insights">
-                  <Bot />
-                  AI Insights
+                <SidebarMenuButton asChild isActive={isActive('/equipment')} tooltip="Equipment">
+                <Link href="/equipment">
+                    <Cpu />
+                    Equipment
+                </Link>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild isActive={isActive('/maintenance')} tooltip="Maintenance">
+                <Link href="/maintenance">
+                  <Wrench />
+                  Maintenance
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
