@@ -33,7 +33,6 @@ export function Header() {
                 alt={logoImage.description}
                 width={40}
                 height={40}
-                className="rounded-lg"
                 data-ai-hint={logoImage.imageHint}
               />
           )}
