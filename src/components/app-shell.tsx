@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Compass, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server } from 'lucide-react';
+import { Bot, Compass, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -19,12 +19,12 @@ import React from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 const navItems = [
-    { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights' },
-    { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies' },
+    { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights', isAI: true },
+    { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies', isAI: true },
     { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
     { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
     { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment' },
-    { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance' },
+    { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance', isAI: true },
   ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -67,9 +67,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 return (
                     <SidebarMenuItem key={item.href}>
                         <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.tooltip}>
-                        <Link href={item.href}>
+                        <Link href={item.href} className="flex items-center">
                             <Icon />
-                            {item.label}
+                            <span>{item.label}</span>
+                            {item.isAI && <Sparkles className="ml-auto h-4 w-4 text-accent" />}
                         </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
