@@ -119,156 +119,158 @@ export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
 
   return (
     <TooltipProvider>
-      <Card>
-        <CardHeader>
-          <CardTitle>All Predictenance Tasks</CardTitle>
-          <CardDescription>A complete log of all scheduled and completed predictenance tasks.</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Equipment</TableHead>
-                  <TableHead>Task</TableHead>
-                  <TableHead className="text-neon">Due Date</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Priority</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {sortedTasks.map((task) => (
-                  <TableRow key={task.id}>
-                    <TableCell>
-                      <div className="font-medium">{task.equipmentName}</div>
-                      <div className="text-xs text-muted-foreground">{task.equipmentId}</div>
-                    </TableCell>
-                    <TableCell>{task.task}</TableCell>
-                    <TableCell>
-                      <ClientFormattedDate timestamp={task.dueDate} formatType='full' />
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={statusVariant[task.status]} className="capitalize">
-                        {task.status.replace('-', ' ')}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={priorityVariant[task.priority]} className="capitalize">
-                        {task.priority}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button variant="ghost" size="icon" onClick={() => handleCreateChangeClick(task)} disabled={task.status === 'completed'}>
-                            <PlusCircle className="h-4 w-4" />
-                            <span className="sr-only">Create Change Request</span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Create Change Request</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TableCell>
+      <>
+        <Card>
+          <CardHeader>
+            <CardTitle>All Predictenance Tasks</CardTitle>
+            <CardDescription>A complete log of all scheduled and completed predictenance tasks.</CardDescription>
+          </CardHeader>
+          <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Equipment</TableHead>
+                    <TableHead>Task</TableHead>
+                    <TableHead className="text-neon">Due Date</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Priority</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-        </CardContent>
-      </Card>
-
-      <Dialog open={!!changeRequestTask} onOpenChange={(open) => !open && handleCloseDialog()}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle>Create Change Request</DialogTitle>
-            <DialogDescription>
-              Create a new change request for the task on{' '}
-              <strong>{changeRequestTask?.equipmentName}</strong>.
-            </DialogDescription>
-          </DialogHeader>
-          {changeRequestTask && (
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label>Configuration Item</Label>
-                    <p className="text-sm text-muted-foreground">{changeRequestTask.equipmentName} ({changeRequestTask.equipmentId})</p>
-                  </div>
-                  <div>
-                    <Label>Scheduled Date</Label>
-                    <p className="text-sm text-muted-foreground">
-                      <ClientFormattedDate timestamp={changeRequestTask.dueDate} formatType='full' />
-                    </p>
-                  </div>
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Describe the change"
-                          className="min-h-[100px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 
-                <div className="grid grid-cols-2 gap-4">
-                   <div>
-                      <Label>Priority</Label>
-                      <p className="text-sm font-medium capitalize">
-                        <Badge variant={priorityVariant[changeRequestTask.priority]}>
-                          {changeRequestTask.priority}
+                </TableHeader>
+                <TableBody>
+                  {sortedTasks.map((task) => (
+                    <TableRow key={task.id}>
+                      <TableCell>
+                        <div className="font-medium">{task.equipmentName}</div>
+                        <div className="text-xs text-muted-foreground">{task.equipmentId}</div>
+                      </TableCell>
+                      <TableCell>{task.task}</TableCell>
+                      <TableCell>
+                        <ClientFormattedDate timestamp={task.dueDate} formatType='full' />
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={statusVariant[task.status]} className="capitalize">
+                          {task.status.replace('-', ' ')}
                         </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={priorityVariant[task.priority]} className="capitalize">
+                          {task.priority}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="icon" onClick={() => handleCreateChangeClick(task)} disabled={task.status === 'completed'}>
+                              <PlusCircle className="h-4 w-4" />
+                              <span className="sr-only">Create Change Request</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Create Change Request</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+          </CardContent>
+        </Card>
+
+        <Dialog open={!!changeRequestTask} onOpenChange={(open) => !open && handleCloseDialog()}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Create Change Request</DialogTitle>
+              <DialogDescription>
+                Create a new change request for the task on{' '}
+                <strong>{changeRequestTask?.equipmentName}</strong>.
+              </DialogDescription>
+            </DialogHeader>
+            {changeRequestTask && (
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Configuration Item</Label>
+                      <p className="text-sm text-muted-foreground">{changeRequestTask.equipmentName} ({changeRequestTask.equipmentId})</p>
+                    </div>
+                    <div>
+                      <Label>Scheduled Date</Label>
+                      <p className="text-sm text-muted-foreground">
+                        <ClientFormattedDate timestamp={changeRequestTask.dueDate} formatType='full' />
                       </p>
-                   </div>
+                    </div>
+                  </div>
 
-                    <FormField
-                      control={form.control}
-                      name="assignmentGroup"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Assignment Group</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select group..." />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="hardware-team">Hardware Team</SelectItem>
-                              <SelectItem value="software-team">Software Team</SelectItem>
-                              <SelectItem value="network-engineering">Network Engineering</SelectItem>
-                              <SelectItem value="facilities-ops">Facilities Ops</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                </div>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Description</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Describe the change"
+                            className="min-h-[100px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                   
+                  <div className="grid grid-cols-2 gap-4">
+                     <div>
+                        <Label>Priority</Label>
+                        <p className="text-sm font-medium capitalize">
+                          <Badge variant={priorityVariant[changeRequestTask.priority]}>
+                            {changeRequestTask.priority}
+                          </Badge>
+                        </p>
+                     </div>
 
-                <DialogFooter>
-                  <Button type="button" variant="outline" onClick={handleCloseDialog} disabled={isSubmitting}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Create Request
-                  </Button>
-                </DialogFooter>
-              </form>
-            </Form>
-          )}
-        </DialogContent>
-      </Dialog>
+                      <FormField
+                        control={form.control}
+                        name="assignmentGroup"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Assignment Group</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select group..." />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="hardware-team">Hardware Team</SelectItem>
+                                <SelectItem value="software-team">Software Team</SelectItem>
+                                <SelectItem value="network-engineering">Network Engineering</SelectItem>
+                                <SelectItem value="facilities-ops">Facilities Ops</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                  </div>
+
+                  <DialogFooter>
+                    <Button type="button" variant="outline" onClick={handleCloseDialog} disabled={isSubmitting}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                      Create Request
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </Form>
+            )}
+          </DialogContent>
+        </Dialog>
+      </>
     </TooltipProvider>
   );
 }

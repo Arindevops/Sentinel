@@ -116,141 +116,143 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
 
   return (
     <TooltipProvider>
-      <Card>
-        <CardHeader>
-          <CardTitle>Anomaly Log</CardTitle>
-          <CardDescription>A complete log of all detected anomalies.</CardDescription>
-        </CardHeader>
-        <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Equipment</TableHead>
-                  <TableHead className="text-neon">Description</TableHead>
-                  <TableHead>Timestamp</TableHead>
-                  <TableHead>Severity</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {sortedAnomalies.map((anomaly) => (
-                  <TableRow key={anomaly.id}>
-                    <TableCell>
-                      <div className="font-medium">{anomaly.equipmentName}</div>
-                      <div className="text-xs text-muted-foreground">{anomaly.equipmentId}</div>
-                    </TableCell>
-                    <TableCell>{anomaly.description}</TableCell>
-                    <TableCell>
-                      <ClientFormattedDate timestamp={anomaly.timestamp} />
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={priorityVariant[anomaly.severity]} className="capitalize">
-                        {anomaly.severity}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button variant="ghost" size="icon" onClick={() => handleCreateIncidentClick(anomaly)}>
-                            <PlusCircle className="h-4 w-4" />
-                            <span className="sr-only">Create Incident</span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>Create Incident</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TableCell>
+      <>
+        <Card>
+          <CardHeader>
+            <CardTitle>Anomaly Log</CardTitle>
+            <CardDescription>A complete log of all detected anomalies.</CardDescription>
+          </CardHeader>
+          <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Equipment</TableHead>
+                    <TableHead className="text-neon">Description</TableHead>
+                    <TableHead>Timestamp</TableHead>
+                    <TableHead>Severity</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-        </CardContent>
-      </Card>
-      
-      <Dialog open={!!incidentAnomaly} onOpenChange={(open) => !open && handleCloseDialog()}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Create Incident</DialogTitle>
-            <DialogDescription>
-              Create a new incident for the anomaly on{' '}
-              <strong>{incidentAnomaly?.equipmentName}</strong>.
-            </DialogDescription>
-          </DialogHeader>
-          {incidentAnomaly && (
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
-                 <div>
-                  <Label>Equipment</Label>
-                  <p className="text-sm text-muted-foreground">{incidentAnomaly.equipmentName} ({incidentAnomaly.equipmentId})</p>
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Issue Description</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Describe the issue"
-                          className="min-h-[100px]"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 
-                <div className="grid grid-cols-2 gap-4">
-                   <div>
-                      <Label>Priority</Label>
-                      <p className="text-sm font-medium capitalize">
-                        <Badge variant={priorityVariant[incidentAnomaly.severity]}>
-                          {incidentAnomaly.severity}
+                </TableHeader>
+                <TableBody>
+                  {sortedAnomalies.map((anomaly) => (
+                    <TableRow key={anomaly.id}>
+                      <TableCell>
+                        <div className="font-medium">{anomaly.equipmentName}</div>
+                        <div className="text-xs text-muted-foreground">{anomaly.equipmentId}</div>
+                      </TableCell>
+                      <TableCell>{anomaly.description}</TableCell>
+                      <TableCell>
+                        <ClientFormattedDate timestamp={anomaly.timestamp} />
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={priorityVariant[anomaly.severity]} className="capitalize">
+                          {anomaly.severity}
                         </Badge>
-                      </p>
-                   </div>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="ghost" size="icon" onClick={() => handleCreateIncidentClick(anomaly)}>
+                              <PlusCircle className="h-4 w-4" />
+                              <span className="sr-only">Create Incident</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Create Incident</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+          </CardContent>
+        </Card>
+        
+        <Dialog open={!!incidentAnomaly} onOpenChange={(open) => !open && handleCloseDialog()}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Create Incident</DialogTitle>
+              <DialogDescription>
+                Create a new incident for the anomaly on{' '}
+                <strong>{incidentAnomaly?.equipmentName}</strong>.
+              </DialogDescription>
+            </DialogHeader>
+            {incidentAnomaly && (
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
+                   <div>
+                    <Label>Equipment</Label>
+                    <p className="text-sm text-muted-foreground">{incidentAnomaly.equipmentName} ({incidentAnomaly.equipmentId})</p>
+                  </div>
 
-                    <FormField
-                      control={form.control}
-                      name="impact"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Impact</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select impact" />
-                              </Trigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="high">High</SelectItem>
-                              <SelectItem value="medium">Medium</SelectItem>
-                              <SelectItem value="low">Low</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                </div>
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Issue Description</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Describe the issue"
+                            className="min-h-[100px]"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                   
+                  <div className="grid grid-cols-2 gap-4">
+                     <div>
+                        <Label>Priority</Label>
+                        <p className="text-sm font-medium capitalize">
+                          <Badge variant={priorityVariant[incidentAnomaly.severity]}>
+                            {incidentAnomaly.severity}
+                          </Badge>
+                        </p>
+                     </div>
 
-                <DialogFooter>
-                  <Button type="button" variant="outline" onClick={handleCloseDialog} disabled={isSubmitting}>
-                    Cancel
-                  </Button>
-                  <Button type="submit" disabled={isSubmitting}>
-                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Create Incident
-                  </Button>
-                </DialogFooter>
-              </form>
-            </Form>
-          )}
-        </DialogContent>
-      </Dialog>
+                      <FormField
+                        control={form.control}
+                        name="impact"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Impact</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select impact" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="high">High</SelectItem>
+                                <SelectItem value="medium">Medium</SelectItem>
+                                <SelectItem value="low">Low</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                  </div>
+
+                  <DialogFooter>
+                    <Button type="button" variant="outline" onClick={handleCloseDialog} disabled={isSubmitting}>
+                      Cancel
+                    </Button>
+                    <Button type="submit" disabled={isSubmitting}>
+                      {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                      Create Incident
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </Form>
+            )}
+          </DialogContent>
+        </Dialog>
+      </>
     </TooltipProvider>
   );
 }
