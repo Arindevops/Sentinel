@@ -25,13 +25,14 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useToast } from '@/hooks/use-toast';
 import { handleCreateIncident } from '@/app/actions';
 import { Loader2, PlusCircle } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface AnomaliesClientProps {
   anomalies: Anomaly[];
@@ -61,6 +62,10 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
 
   const form = useForm<IncidentFormValues>({
     resolver: zodResolver(incidentFormSchema),
+    defaultValues: {
+      description: '',
+      impact: 'medium',
+    }
   });
 
   const { formState: { isSubmitting } } = form;
@@ -153,10 +158,17 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="outline" size="sm" onClick={() => handleCreateIncidentClick(anomaly)}>
-                      <PlusCircle className="mr-2 h-4 w-4" />
-                      Create Incident
-                    </Button>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="ghost" size="icon" onClick={() => handleCreateIncidentClick(anomaly)}>
+                          <PlusCircle className="h-4 w-4" />
+                          <span className="sr-only">Create Incident</span>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Create Incident</p>
+                      </TooltipContent>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               ))}
