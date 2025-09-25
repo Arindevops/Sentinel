@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Factory, ChevronDown } from 'lucide-react';
+import { Database, ChevronDown } from 'lucide-react';
 
 const avatarImage = PlaceHolderImages.find((img) => img.id === 'user-avatar');
 
@@ -26,7 +26,7 @@ export function Header() {
         </div>
         <div className="hidden items-center gap-2 md:flex">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Factory className="h-6 w-6" />
+            <Database className="h-6 w-6" />
           </div>
           <h1 className="text-2xl font-bold text-primary">Data Centre Sentinel</h1>
         </div>
