@@ -26,7 +26,6 @@ const navItems = [
     { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
     { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment', isAI: true },
     { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance', isAI: true },
-    { href: '/architecture', icon: DraftingCompass, label: 'Architecture', tooltip: 'Architecture' },
   ];
 
 function SideNav() {

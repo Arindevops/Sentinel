@@ -1,75 +1,98 @@
-
 'use client';
 
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarProvider,
+} from '@/components/ui/sidebar';
+import { Bot, Compass, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server, Sparkles, DraftingCompass } from 'lucide-react';
+import Link from 'next/link';
+import { Header } from './dashboard/header';
+import { usePathname } from 'next/navigation';
 import React from 'react';
-import { ReactFlow, Background, Controls, MiniMap, useNodesState, useEdgesState, type Node, type Edge } from '@xyflow/react';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
-import '@xyflow/react/dist/style.css';
-
-const initialNodes: Node[] = [
-    {
-      id: '1',
-      type: 'input',
-      data: { label: 'User (Operator)' },
-      position: { x: 0, y: 150 },
-    },
-    {
-      id: '2',
-      data: { label: 'Next.js Frontend (React Components)' },
-      position: { x: 250, y: 150 },
-      className: 'w-[200px]'
-    },
-    {
-      id: '3',
-      data: { label: 'Next.js Backend (Server Actions)' },
-      position: { x: 550, y: 0 },
-      className: 'w-[200px]'
-    },
-    {
-        id: '4',
-        data: { label: 'Genkit AI Flows' },
-        position: { x: 800, y: 0 },
-        className: 'w-[200px]'
-    },
-    {
-        id: '5',
-        data: { label: 'Google AI (Gemini Pro)' },
-        position: { x: 1050, y: 0 },
-        className: 'w-[200px]'
-    },
-    {
-        id: '6',
-        data: { label: 'Mock Data Service' },
-        position: { x: 550, y: 300 },
-        className: 'w-[200px]'
-    },
-  ];
-  
-  const initialEdges: Edge[] = [
-    { id: 'e1-2', source: '1', target: '2', label: 'Interacts with UI' },
-    { id: 'e2-3', source: '2', target: '3', animated: true, label: 'Calls Server Action' },
-    { id: 'e3-4', source: '3', target: '4', animated: true, label: 'Invokes Flow' },
-    { id: 'e4-5', source: '4', target: '5', animated: true, label: 'Sends Prompt' },
-    { id: 'e2-6', source: '2', target: '6', label: 'Fetches initial data'},
+const navItems = [
+    { href: '/', icon: LayoutDashboard, label: 'Dashboard', tooltip: 'Dashboard' },
+    { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights', isAI: true },
+    { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies', isAI: true },
+    { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
+    { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
+    { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment', isAI: true },
+    { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance', isAI: true },
   ];
 
-export function ArchitectureClient() {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+function SideNav() {
+    const pathname = usePathname();
+    const isActive = (path: string) => pathname === path;
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    return (
+        <SidebarMenu>
+            {isClient && navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                    <SidebarMenuItem key={item.href}>
+                        <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.tooltip}>
+                        <Link href={item.href}>
+                            <Icon />
+                            <span className="flex items-center gap-2">
+                              {item.label}
+                              {item.isAI && <Sparkles className="h-4 w-4 text-neon" />}
+                            </span>
+                        </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                );
+            })}
+             <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Settings" isActive={false}>
+                <Link href="#">
+                  <Settings />
+                  Settings
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+    )
+}
+
+
+export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        fitView
-      >
-        <Controls />
-        <MiniMap />
-        <Background gap={12} size={1} />
-      </ReactFlow>
-    </div>
+    <SidebarProvider>
+      <Sidebar>
+        <SidebarHeader className="p-4 transition-transform duration-300 group-data-[collapsible=icon]:-translate-x-16">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex flex-col items-center text-center">
+                <Compass className="h-8 w-8 text-primary" />
+                <h1 className="text-lg font-semibold text-primary mt-2">Navigation Pane</h1>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="right" align="center">
+              Navigation Pane
+            </TooltipContent>
+          </Tooltip>
+        </SidebarHeader>
+        <SidebarContent>
+            <SideNav />
+        </SidebarContent>
+      </Sidebar>
+      <SidebarInset>
+        <Header />
+        {children}
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
