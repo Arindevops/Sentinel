@@ -1,4 +1,3 @@
-
 'use client';
 
 import {
@@ -11,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server } from 'lucide-react';
+import { Bot, Compass, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -38,7 +37,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex flex-col items-center text-center">
-                <Server className="h-8 w-8 text-primary" />
+                <Compass className="h-8 w-8 text-primary" />
                 <h1 className="text-lg font-semibold text-primary mt-2">Navigation Pane</h1>
               </div>
             </TooltipTrigger>

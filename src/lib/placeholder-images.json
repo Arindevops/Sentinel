@@ -3,8 +3,8 @@
     {
       "id": "user-avatar",
       "description": "User avatar for the profile dropdown",
-      "imageUrl": "https://images.unsplash.com/photo-1490750967868-88aa4486c946?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx1c2VyJTIwcGljfGVufDB8fHx8MTc2MTE0MTI5MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "user icon"
+      "imageUrl": "https://images.unsplash.com/photo-1580790826284-A3386a117075?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtaW5pb24lMjBhdmF0YXJ8ZW58MHx8fHwxNzYzMTI3NTg4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "user avatar"
     },
     {
       "id": "app-logo",
