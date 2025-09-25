@@ -43,7 +43,7 @@ function SideNav() {
                             <Icon />
                             <span className="flex items-center gap-2">
                               {item.label}
-                              {item.isAI && <Sparkles className="h-4 w-4 text-accent" />}
+                              {item.isAI && <Sparkles className="h-4 w-4 text-neon" />}
                             </span>
                         </Link>
                         </SidebarMenuButton>
