@@ -19,6 +19,7 @@ import React from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 const navItems = [
+    { href: '/', icon: LayoutDashboard, label: 'Dashboard', tooltip: 'Dashboard' },
     { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights', isAI: true },
     { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies', isAI: true },
     { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
@@ -27,9 +28,47 @@ const navItems = [
     { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance', isAI: true },
   ];
 
+function SideNav() {
+    const pathname = usePathname();
+    const isActive = (path: string) => pathname === path;
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    return (
+        <SidebarMenu>
+            {isClient && navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                    <SidebarMenuItem key={item.href}>
+                        <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.tooltip}>
+                        <Link href={item.href}>
+                            <Icon />
+                            <span className="flex items-center gap-2">
+                              {item.label}
+                              {item.isAI && <Sparkles className="h-4 w-4 text-accent" />}
+                            </span>
+                        </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                );
+            })}
+             <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip="Settings">
+                <Link href="#">
+                  <Settings />
+                  Settings
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+    )
+}
+
+
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
 
   return (
     <SidebarProvider>
@@ -48,45 +87,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Tooltip>
         </SidebarHeader>
         <SidebarContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                asChild
-                isActive={isActive('/')}
-                tooltip="Dashboard"
-                className={isActive('/') ? 'bg-accent text-accent-foreground' : ''}
-              >
-                <Link href="/">
-                  <LayoutDashboard />
-                  Dashboard
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                    <SidebarMenuItem key={item.href}>
-                        <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.tooltip}>
-                        <Link href={item.href}>
-                            <Icon />
-                            <span className="flex items-center gap-2">
-                              {item.label}
-                              {item.isAI && <Sparkles className="h-4 w-4 text-accent" />}
-                            </span>
-                        </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                );
-            })}
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Settings">
-                <Link href="#">
-                  <Settings />
-                  Settings
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
+            <SideNav />
         </SidebarContent>
       </Sidebar>
       <SidebarInset>
