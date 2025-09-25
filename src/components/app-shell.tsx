@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -10,10 +11,20 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Database, Factory, LayoutDashboard, Settings, Upload, Wrench, ShieldAlert, Cpu } from 'lucide-react';
+import { Bot, Database, Cpu, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
+import React from 'react';
+
+const navItems = [
+  { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights' },
+  { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies' },
+  { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
+  { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
+  { href: '/equipment', icon: Cpu, label: 'Equipment', tooltip: 'Equipment' },
+  { href: '/maintenance', icon: Wrench, label: 'Maintenance', tooltip: 'Maintenance' },
+];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -23,66 +34,36 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader className="p-4 transition-transform duration-300 group-data-[collapsible=icon]:-translate-x-16">
-            <h1 className="text-lg font-semibold text-primary">Navigation Pane</h1>
+          <h1 className="text-lg font-semibold text-primary">Navigation Pane</h1>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/')} tooltip="Dashboard" className={isActive('/') ? 'bg-accent text-accent-foreground' : ''}>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive('/')}
+                tooltip="Dashboard"
+                className={isActive('/') ? 'bg-accent text-accent-foreground' : ''}
+              >
                 <Link href="/">
                   <LayoutDashboard />
                   Dashboard
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-             <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/ai-insights')} tooltip="AI Insights">
-                <Link href="/ai-insights">
-                  <Bot />
-                  AI Insights
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/anomalies')} tooltip="Anomalies">
-                <Link href="/anomalies">
-                  <ShieldAlert />
-                  Anomalies
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive('/asset-data-lake')} tooltip="Asset Data Lake">
-                <Link href="/asset-data-lake">
-                    <Database />
-                    Asset Data Lake
-                </Link>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive('/data-upload')} tooltip="Data Upload">
-                    <Link href="/data-upload">
-                        <Upload />
-                        Data Upload
-                    </Link>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive('/equipment')} tooltip="Equipment">
-                <Link href="/equipment">
-                    <Cpu />
-                    Equipment
-                </Link>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={isActive('/maintenance')} tooltip="Maintenance">
-                <Link href="/maintenance">
-                  <Wrench />
-                  Maintenance
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
+                    <SidebarMenuItem key={item.href}>
+                        <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.tooltip}>
+                        <Link href={item.href}>
+                            <Icon />
+                            {item.label}
+                        </Link>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                );
+            })}
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip="Settings">
                 <Link href="#">
