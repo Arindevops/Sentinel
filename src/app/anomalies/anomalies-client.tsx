@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import type { Anomaly } from '@/lib/types';
-import { format } from 'date-fns';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import {
@@ -33,6 +32,8 @@ import { handleCreateIncident } from '@/app/actions';
 import { Loader2, PlusCircle } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { ClientFormattedDate } from '@/components/client-formatted-date';
+
 
 interface AnomaliesClientProps {
   anomalies: Anomaly[];
@@ -44,17 +45,6 @@ const incidentFormSchema = z.object({
 });
 
 type IncidentFormValues = z.infer<typeof incidentFormSchema>;
-
-
-const ClientFormattedDate = ({ timestamp }: { timestamp: string }) => {
-    const [formattedDate, setFormattedDate] = React.useState('');
-  
-    React.useEffect(() => {
-      setFormattedDate(format(new Date(timestamp), 'PPpp'));
-    }, [timestamp]);
-  
-    return <>{formattedDate}</>;
-};
 
 export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
   const [incidentAnomaly, setIncidentAnomaly] = React.useState<Anomaly | null>(null);
@@ -254,8 +244,7 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Create Incident
                   </Button>
-                </DialogFooter>
-              </form>
+                </DialogFooter>              </form>
             </Form>
           )}
         </DialogContent>

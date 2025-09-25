@@ -11,26 +11,12 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import type { PredictenanceTask } from '@/lib/types';
-import { format, formatDistanceToNow } from 'date-fns';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ClientFormattedDate } from '@/components/client-formatted-date';
 
 interface PredictenanceClientProps {
   tasks: PredictenanceTask[];
 }
-
-const ClientFormattedDate = ({ timestamp, formatType }: { timestamp: string, formatType: 'distance' | 'full' }) => {
-    const [formattedDate, setFormattedDate] = React.useState('');
-  
-    React.useEffect(() => {
-        if (formatType === 'distance') {
-            setFormattedDate(formatDistanceToNow(new Date(timestamp), { addSuffix: true }));
-        } else {
-            setFormattedDate(format(new Date(timestamp), 'PPpp'));
-        }
-    }, [timestamp, formatType]);
-  
-    return <>{formattedDate}</>;
-  };
 
 export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
   const priorityVariant: Record<PredictenanceTask['priority'], 'destructive' | 'secondary' | 'default'> = {

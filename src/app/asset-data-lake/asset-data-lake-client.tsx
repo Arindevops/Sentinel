@@ -10,22 +10,12 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import type { AssetData } from '@/lib/types';
-import { format } from 'date-fns';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ClientFormattedDate } from '@/components/client-formatted-date';
 
 interface AssetDataLakeClientProps {
   data: AssetData[];
 }
-
-const ClientFormattedDate = ({ timestamp }: { timestamp: string }) => {
-    const [formattedDate, setFormattedDate] = React.useState('');
-  
-    React.useEffect(() => {
-        setFormattedDate(format(new Date(timestamp), 'PPpp'));
-    }, [timestamp]);
-  
-    return <>{formattedDate}</>;
-  };
 
 export function AssetDataLakeClient({ data }: AssetDataLakeClientProps) {
 

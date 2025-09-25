@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import type { Anomaly } from '@/lib/types';
-import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -18,20 +17,11 @@ import { useToast } from '@/hooks/use-toast';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '../ui/scroll-area';
+import { ClientFormattedDate } from '../client-formatted-date';
 
 interface AnomalyListProps {
   anomalies: Anomaly[];
 }
-
-const ClientFormattedDate = ({ timestamp }: { timestamp: string }) => {
-  const [formattedDate, setFormattedDate] = React.useState('');
-
-  React.useEffect(() => {
-    setFormattedDate(format(new Date(timestamp), 'PPpp'));
-  }, [timestamp]);
-
-  return <>{formattedDate}</>;
-};
 
 export function AnomalyList({ anomalies }: AnomalyListProps) {
   const [selectedAnomaly, setSelectedAnomaly] = React.useState<Anomaly | null>(null);

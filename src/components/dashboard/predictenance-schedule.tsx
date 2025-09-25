@@ -11,22 +11,12 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import type { PredictenanceTask } from '@/lib/types';
-import { formatDistanceToNow } from 'date-fns';
 import { ScrollArea } from '../ui/scroll-area';
+import { ClientFormattedDate } from '../client-formatted-date';
 
 interface PredictenanceScheduleProps {
   tasks: PredictenanceTask[];
 }
-
-const ClientFormattedDate = ({ timestamp }: { timestamp: string }) => {
-  const [formattedDate, setFormattedDate] = React.useState('');
-
-  React.useEffect(() => {
-    setFormattedDate(formatDistanceToNow(new Date(timestamp), { addSuffix: true }));
-  }, [timestamp]);
-
-  return <>{formattedDate}</>;
-};
 
 export function PredictenanceSchedule({ tasks }: PredictenanceScheduleProps) {
   const priorityVariant: Record<PredictenanceTask['priority'], 'destructive' | 'secondary' | 'default'> = {
@@ -59,7 +49,7 @@ export function PredictenanceSchedule({ tasks }: PredictenanceScheduleProps) {
               </TableCell>
               <TableCell>{task.task}</TableCell>
               <TableCell>
-                <ClientFormattedDate timestamp={task.dueDate} />
+                <ClientFormattedDate timestamp={task.dueDate} formatType="distance" />
               </TableCell>
               <TableCell className="text-right">
                 <Badge variant={priorityVariant[task.priority]} className="capitalize">
