@@ -77,3 +77,38 @@ export async function handleCreateIncident(data: unknown) {
     return { success: false, error: `Failed to create incident: ${errorMessage}` };
   }
 }
+
+
+const changeRequestSchema = z.object({
+  configurationItem: z.string(),
+  description: z.string(),
+  priority: z.string(),
+  scheduleDate: z.string(),
+  assignmentGroup: z.string(),
+});
+
+export async function handleCreateChangeRequest(data: unknown) {
+  try {
+    const validatedData = changeRequestSchema.parse(data);
+
+    // TODO: Replace with your actual change management tool API call
+    console.log('Creating change request with data:', validatedData);
+    // const response = await fetch('https://your.change.api/changes', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_API_KEY' },
+    //   body: JSON.stringify(validatedData),
+    // });
+    // if (!response.ok) {
+    //   throw new Error('Failed to create change request in the management tool');
+    // }
+
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    return { success: true, data: { changeId: `CHG-${Date.now()}` } };
+  } catch (error) {
+    console.error('Error creating change request:', error);
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return { success: false, error: `Failed to create change request: ${errorMessage}` };
+  }
+}
