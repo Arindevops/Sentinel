@@ -27,14 +27,17 @@ export function Header() {
           <SidebarTrigger />
         </div>
         <div className="hidden items-center gap-2 md:flex">
-          <Image
-            src="https://storage.googleapis.com/aifirebase/projects/art-venture/images/5f38167f-8c31-4a1e-953e-5e36f6d50f58.png"
-            alt="Data Centre Sentinel Logo"
-            width={40}
-            height={40}
-            data-ai-hint="data center logo"
-          />
-          <h1 className="text-3xl font-bold text-white">Data Centre Sentinel</h1>
+          {logoImage && (
+            <Image
+              src={logoImage.imageUrl}
+              alt={logoImage.description}
+              width={40}
+              height={40}
+              data-ai-hint={logoImage.imageHint}
+              className="rounded-lg"
+            />
+          )}
+          <h1 className="text-xl font-bold text-white">Data Centre Sentinel</h1>
         </div>
       </div>
       <DropdownMenu>
