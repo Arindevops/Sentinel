@@ -61,7 +61,7 @@ export function AiInsightsClient({ equipment }: AiInsightsClientProps) {
         <CardHeader>
           <CardTitle>Equipment Insight Generator</CardTitle>
           <CardDescription>
-            Select a piece of equipment to generate an AI-powered summary of its status and health.
+            Generate AI-powered summaries for your equipment.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
