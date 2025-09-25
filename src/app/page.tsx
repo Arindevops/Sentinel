@@ -1,16 +1,16 @@
 import {
   getSensorData,
-  getMaintenanceTasks,
+  getPredictenanceTasks,
   getAnomalies,
   getOverviewData,
 } from '@/lib/data';
 import { DashboardClient } from '@/components/dashboard/dashboard-client';
-import type { Anomaly, MaintenanceTask, OverviewData, SensorDataPoint } from '@/lib/types';
+import type { Anomaly, PredictenanceTask, OverviewData, SensorDataPoint } from '@/lib/types';
 
 
 export default async function DashboardPage() {
   const sensorData: SensorDataPoint[] = await getSensorData();
-  const maintenanceTasks: MaintenanceTask[] = await getMaintenanceTasks();
+  const maintenanceTasks: PredictenanceTask[] = await getPredictenanceTasks();
   const anomalies: Anomaly[] = await getAnomalies();
   const overviewData: OverviewData = await getOverviewData();
 

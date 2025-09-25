@@ -1,4 +1,4 @@
-import type { Equipment, SensorDataPoint, MaintenanceTask, Anomaly, OverviewData, AssetData } from './types';
+import type { Equipment, SensorDataPoint, PredictenanceTask, Anomaly, OverviewData, AssetData } from './types';
 import { subDays, format, addDays } from 'date-fns';
 
 const now = new Date();
@@ -86,7 +86,7 @@ const anomalies: Anomaly[] = [
   },
 ];
 
-const maintenanceTasks: MaintenanceTask[] = [
+const predictenanceTasks: PredictenanceTask[] = [
   {
     id: 'MNT-001',
     equipmentId: 'EQP-002',
@@ -180,15 +180,15 @@ export async function getAnomalies(): Promise<Anomaly[]> {
   return anomalies;
 }
 
-export async function getMaintenanceTasks(): Promise<MaintenanceTask[]> {
-  return maintenanceTasks;
+export async function getPredictenanceTasks(): Promise<PredictenanceTask[]> {
+  return predictenanceTasks;
 }
 
 export async function getOverviewData(): Promise<OverviewData> {
   return {
     activeEquipment: equipment.filter((e) => e.status !== 'failed').length,
     anomaliesDetected: anomalies.length,
-    pendingMaintenance: maintenanceTasks.filter((t) => t.status === 'pending').length,
+    pendingPredictenance: predictenanceTasks.filter((t) => t.status === 'pending').length,
     predictedFailures: equipment.filter((e) => e.failurePrediction > 0.75).length,
   };
 }

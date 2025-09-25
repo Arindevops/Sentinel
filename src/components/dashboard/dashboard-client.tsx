@@ -1,16 +1,16 @@
 'use client';
 
-import type { Anomaly, MaintenanceTask, OverviewData, SensorDataPoint } from '@/lib/types';
+import type { Anomaly, PredictenanceTask, OverviewData, SensorDataPoint } from '@/lib/types';
 import { OverviewCards } from '@/components/dashboard/overview-cards';
 import { SensorChart } from '@/components/dashboard/sensor-chart';
-import { MaintenanceSchedule } from '@/components/dashboard/maintenance-schedule';
+import { PredictenanceSchedule } from '@/components/dashboard/predictenance-schedule';
 import { AnomalyList } from '@/components/dashboard/anomaly-list';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 
 interface DashboardClientProps {
     overviewData: OverviewData;
     sensorData: SensorDataPoint[];
-    maintenanceTasks: MaintenanceTask[];
+    maintenanceTasks: PredictenanceTask[];
     anomalies: Anomaly[];
 }
 
@@ -37,11 +37,11 @@ export function DashboardClient({ overviewData, sensorData, maintenanceTasks, an
                     </Card>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Maintenance Schedule</CardTitle>
-                            <CardDescription>Upcoming maintenance tasks for your fleet.</CardDescription>
+                            <CardTitle>Predictenance Schedule</CardTitle>
+                            <CardDescription>Upcoming predictenance tasks for your fleet.</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <MaintenanceSchedule tasks={maintenanceTasks} />
+                            <PredictenanceSchedule tasks={maintenanceTasks} />
                         </CardContent>
                     </Card>
                 </div>

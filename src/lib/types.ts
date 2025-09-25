@@ -32,7 +32,7 @@ export type Anomaly = {
   potentialCauses: string;
 };
 
-export type MaintenanceTask = {
+export type PredictenanceTask = {
   id: string;
   equipmentId: string;
   equipmentName: string;
@@ -45,7 +45,7 @@ export type MaintenanceTask = {
 export type OverviewData = {
   activeEquipment: number;
   anomaliesDetected: number;
-  pendingMaintenance: number;
+  pendingPredictenance: number;
   predictedFailures: number;
 };
 

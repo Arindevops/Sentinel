@@ -24,11 +24,11 @@ export function OverviewCards({ data }: OverviewCardsProps) {
       href: '/anomalies',
     },
     {
-      title: 'Pending Maintenance',
-      value: data.pendingMaintenance,
+      title: 'Pending Predictenance',
+      value: data.pendingPredictenance,
       icon: Wrench,
       description: 'Upcoming service tasks',
-      href: '/maintenance',
+      href: '/predictenance',
     },
     {
       title: 'High Failure Risk',

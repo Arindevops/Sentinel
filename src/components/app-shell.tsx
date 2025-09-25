@@ -23,7 +23,7 @@ const navItems = [
     { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
     { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
     { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment' },
-    { href: '/maintenance', icon: Wrench, label: 'Maintenance', tooltip: 'Maintenance' },
+    { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance' },
   ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
