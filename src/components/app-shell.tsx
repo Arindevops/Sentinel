@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Compass, Cpu, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench } from 'lucide-react';
+import { Bot, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -23,7 +23,7 @@ const navItems = [
     { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies' },
     { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
     { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
-    { href: '/equipment', icon: Cpu, label: 'Equipment', tooltip: 'Equipment' },
+    { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment' },
     { href: '/maintenance', icon: Wrench, label: 'Maintenance', tooltip: 'Maintenance' },
   ];
 
@@ -38,7 +38,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex flex-col items-center text-center">
-                <Compass className="h-8 w-8 text-primary" />
+                <Server className="h-8 w-8 text-primary" />
                 <h1 className="text-lg font-semibold text-primary mt-2">Navigation Pane</h1>
               </div>
             </TooltipTrigger>

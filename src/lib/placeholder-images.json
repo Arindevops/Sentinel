@@ -8,9 +8,9 @@
     },
     {
       "id": "app-logo",
-      "description": "Colorful abstract logo for the application",
-      "imageUrl": "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGxvZ298ZW58MHx8fHwxNzYxMDYxMDI4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "abstract logo"
+      "description": "Logo for Data Centre Asset Monitoring Tool",
+      "imageUrl": "https://storage.googleapis.com/aifirebase/projects/art-venture/images/15865a7e-856c-48c2-a9b0-a044e99f456f.png",
+      "imageHint": "data center"
     }
   ]
 }

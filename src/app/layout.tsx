@@ -5,7 +5,7 @@ import { AppShell } from '@/components/app-shell';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Industrial Sentinel',
+  title: 'Data Centre Asset Monitoring',
   description: 'Predictive Maintenance and Anomaly Detection Dashboard',
 };
 

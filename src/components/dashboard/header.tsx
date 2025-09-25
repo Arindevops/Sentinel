@@ -37,7 +37,7 @@ export function Header() {
                 data-ai-hint={logoImage.imageHint}
               />
           )}
-          <h1 className="text-2xl font-bold text-primary">Industrial Sentinel</h1>
+          <h1 className="text-xl font-bold text-primary">Data Centre</h1>
         </div>
       </div>
       <DropdownMenu>
