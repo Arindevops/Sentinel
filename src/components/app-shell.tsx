@@ -11,11 +11,12 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Database, Cpu, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench } from 'lucide-react';
+import { Bot, Compass, Cpu, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 const navItems = [
   { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights' },
@@ -34,7 +35,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader className="p-4 transition-transform duration-300 group-data-[collapsible=icon]:-translate-x-16">
-          <h1 className="text-lg font-semibold text-primary">Navigation Pane</h1>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex flex-col items-center text-center">
+                <Compass className="h-8 w-8 text-primary" />
+                <h1 className="text-lg font-semibold text-primary mt-2">Navigation Pane</h1>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="right" align="center">
+              Navigation Pane
+            </TooltipContent>
+          </Tooltip>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
