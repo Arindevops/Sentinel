@@ -19,13 +19,13 @@ import React from 'react';
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 
 const navItems = [
-  { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights' },
-  { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies' },
-  { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
-  { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
-  { href: '/equipment', icon: Cpu, label: 'Equipment', tooltip: 'Equipment' },
-  { href: '/maintenance', icon: Wrench, label: 'Maintenance', tooltip: 'Maintenance' },
-];
+    { href: '/ai-insights', icon: Bot, label: 'AI Insights', tooltip: 'AI Insights' },
+    { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies' },
+    { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
+    { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
+    { href: '/equipment', icon: Cpu, label: 'Equipment', tooltip: 'Equipment' },
+    { href: '/maintenance', icon: Wrench, label: 'Maintenance', tooltip: 'Maintenance' },
+  ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

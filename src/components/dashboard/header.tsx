@@ -13,9 +13,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Database, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import Image from 'next/image';
 
 const avatarImage = PlaceHolderImages.find((img) => img.id === 'user-avatar');
+const logoImage = PlaceHolderImages.find((img) => img.id === 'app-logo');
 
 export function Header() {
   return (
@@ -25,10 +27,17 @@ export function Header() {
           <SidebarTrigger />
         </div>
         <div className="hidden items-center gap-2 md:flex">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Database className="h-6 w-6" />
-          </div>
-          <h1 className="text-2xl font-bold text-primary">Data Centre Sentinel</h1>
+          {logoImage && (
+             <Image
+                src={logoImage.imageUrl}
+                alt={logoImage.description}
+                width={40}
+                height={40}
+                className="rounded-lg"
+                data-ai-hint={logoImage.imageHint}
+              />
+          )}
+          <h1 className="text-2xl font-bold text-primary">Industrial Sentinel</h1>
         </div>
       </div>
       <DropdownMenu>

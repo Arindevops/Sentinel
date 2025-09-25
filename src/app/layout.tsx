@@ -1,10 +1,11 @@
+
 import type { Metadata } from 'next';
 import './globals.css';
 import { AppShell } from '@/components/app-shell';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Data Centre Sentinel',
+  title: 'Industrial Sentinel',
   description: 'Predictive Maintenance and Anomaly Detection Dashboard',
 };
 
