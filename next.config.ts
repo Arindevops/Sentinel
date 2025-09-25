@@ -40,6 +40,12 @@ const nextConfig: NextConfig = {
         hostname: 'icons.iconarchive.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.pixabay.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
