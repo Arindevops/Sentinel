@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -130,7 +131,7 @@ export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
                 <TableRow>
                   <TableHead>Equipment</TableHead>
                   <TableHead>Task</TableHead>
-                  <TableHead>Due Date</TableHead>
+                  <TableHead className="text-neon">Due Date</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Priority</TableHead>
                   <TableHead className="text-right">Actions</TableHead>

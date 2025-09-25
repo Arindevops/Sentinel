@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -125,7 +126,7 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
             <TableHeader>
               <TableRow>
                 <TableHead>Equipment</TableHead>
-                <TableHead>Description</TableHead>
+                <TableHead className="text-neon">Description</TableHead>
                 <TableHead>Timestamp</TableHead>
                 <TableHead>Severity</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
@@ -222,7 +223,7 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
                             <FormControl>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select impact" />
-                              </SelectTrigger>
+                              </Trigger>
                             </FormControl>
                             <SelectContent>
                               <SelectItem value="high">High</SelectItem>

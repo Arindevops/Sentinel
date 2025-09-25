@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -43,8 +44,8 @@ export function EquipmentClient({ equipment }: EquipmentClientProps) {
               <TableHead>Name</TableHead>
               <TableHead>Location</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Health Score</TableHead>
-              <TableHead className="text-right">RUL (days)</TableHead>
+              <TableHead className="text-neon">Health Score</TableHead>
+              <TableHead className="text-right text-neon">RUL (days)</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
