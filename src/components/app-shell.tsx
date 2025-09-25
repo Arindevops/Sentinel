@@ -31,15 +31,10 @@ const navItems = [
 function SideNav() {
     const pathname = usePathname();
     const isActive = (path: string) => pathname === path;
-    const [isClient, setIsClient] = React.useState(false);
-
-    React.useEffect(() => {
-        setIsClient(true);
-    }, []);
 
     return (
         <SidebarMenu>
-            {isClient && navItems.map((item) => {
+            {navItems.map((item) => {
                 const Icon = item.icon;
                 return (
                     <SidebarMenuItem key={item.href}>
@@ -56,7 +51,7 @@ function SideNav() {
                 );
             })}
              <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Settings">
+              <SidebarMenuButton asChild tooltip="Settings" isActive={false}>
                 <Link href="#">
                   <Settings />
                   Settings
