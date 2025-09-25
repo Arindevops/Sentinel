@@ -32,7 +32,7 @@ import { useToast } from '@/hooks/use-toast';
 import { handleCreateIncident } from '@/app/actions';
 import { Loader2, PlusCircle } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { ClientFormattedDate } from '@/components/client-formatted-date';
 
 
@@ -122,49 +122,51 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
           <CardDescription>A complete log of all detected anomalies.</CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Equipment</TableHead>
-                <TableHead className="text-neon">Description</TableHead>
-                <TableHead>Timestamp</TableHead>
-                <TableHead>Severity</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {sortedAnomalies.map((anomaly) => (
-                <TableRow key={anomaly.id}>
-                  <TableCell>
-                    <div className="font-medium">{anomaly.equipmentName}</div>
-                    <div className="text-xs text-muted-foreground">{anomaly.equipmentId}</div>
-                  </TableCell>
-                  <TableCell>{anomaly.description}</TableCell>
-                  <TableCell>
-                    <ClientFormattedDate timestamp={anomaly.timestamp} />
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={priorityVariant[anomaly.severity]} className="capitalize">
-                      {anomaly.severity}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Button variant="ghost" size="icon" onClick={() => handleCreateIncidentClick(anomaly)}>
-                          <PlusCircle className="h-4 w-4" />
-                          <span className="sr-only">Create Incident</span>
-                        </Button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Create Incident</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TableCell>
+          <TooltipProvider>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Equipment</TableHead>
+                  <TableHead className="text-neon">Description</TableHead>
+                  <TableHead>Timestamp</TableHead>
+                  <TableHead>Severity</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {sortedAnomalies.map((anomaly) => (
+                  <TableRow key={anomaly.id}>
+                    <TableCell>
+                      <div className="font-medium">{anomaly.equipmentName}</div>
+                      <div className="text-xs text-muted-foreground">{anomaly.equipmentId}</div>
+                    </TableCell>
+                    <TableCell>{anomaly.description}</TableCell>
+                    <TableCell>
+                      <ClientFormattedDate timestamp={anomaly.timestamp} />
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={priorityVariant[anomaly.severity]} className="capitalize">
+                        {anomaly.severity}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="icon" onClick={() => handleCreateIncidentClick(anomaly)}>
+                            <PlusCircle className="h-4 w-4" />
+                            <span className="sr-only">Create Incident</span>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Create Incident</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TooltipProvider>
         </CardContent>
       </Card>
       
@@ -245,7 +247,8 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
                     {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     Create Incident
                   </Button>
-                </DialogFooter>              </form>
+                </DialogFooter>
+              </form>
             </Form>
           )}
         </DialogContent>
