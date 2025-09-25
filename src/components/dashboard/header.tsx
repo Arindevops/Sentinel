@@ -34,7 +34,7 @@ export function Header() {
               width={40}
               height={40}
               data-ai-hint={logoImage.imageHint}
-              className="rounded-lg"
+              className="rounded-full"
             />
           )}
           <h1 className="text-xl font-bold text-white">Data Centre Sentinel</h1>
