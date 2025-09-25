@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -30,10 +31,15 @@ const navItems = [
 function SideNav() {
     const pathname = usePathname();
     const isActive = (path: string) => pathname === path;
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     return (
         <SidebarMenu>
-            {navItems.map((item) => {
+            {isClient && navItems.map((item) => {
                 const Icon = item.icon;
                 return (
                     <SidebarMenuItem key={item.href}>
