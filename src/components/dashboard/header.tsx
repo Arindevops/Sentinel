@@ -31,8 +31,8 @@ export function Header() {
             <Image
               src={logoImage.imageUrl}
               alt={logoImage.description}
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               data-ai-hint={logoImage.imageHint}
               className="rounded-full object-cover"
             />
