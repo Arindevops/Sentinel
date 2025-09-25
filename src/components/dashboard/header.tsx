@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Factory } from 'lucide-react';
+import { Factory, ChevronDown } from 'lucide-react';
 
 const avatarImage = PlaceHolderImages.find((img) => img.id === 'user-avatar');
 
@@ -33,7 +33,7 @@ export function Header() {
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+          <Button variant="ghost" className="flex items-center gap-2">
             <Avatar className="h-9 w-9">
               {avatarImage && (
                 <AvatarImage
@@ -42,8 +42,12 @@ export function Header() {
                   data-ai-hint={avatarImage.imageHint}
                 />
               )}
-              <AvatarFallback>AD</AvatarFallback>
+              <AvatarFallback>AU</AvatarFallback>
             </Avatar>
+             <div className="flex flex-col items-start">
+                <span className="text-sm font-medium">Admin User</span>
+             </div>
+            <ChevronDown className="h-4 w-4 text-muted-foreground" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
