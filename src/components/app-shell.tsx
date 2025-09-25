@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
 } from '@/components/ui/sidebar';
-import { Bot, Compass, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server, Sparkles } from 'lucide-react';
+import { Bot, Compass, Database, LayoutDashboard, Settings, ShieldAlert, Upload, Wrench, Server, Sparkles, DraftingCompass } from 'lucide-react';
 import Link from 'next/link';
 import { Header } from './dashboard/header';
 import { usePathname } from 'next/navigation';
@@ -26,6 +26,7 @@ const navItems = [
     { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
     { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment', isAI: true },
     { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance', isAI: true },
+    { href: '/architecture', icon: DraftingCompass, label: 'Architecture', tooltip: 'Architecture' },
   ];
 
 function SideNav() {
