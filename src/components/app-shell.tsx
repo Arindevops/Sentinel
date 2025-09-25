@@ -23,7 +23,7 @@ const navItems = [
     { href: '/anomalies', icon: ShieldAlert, label: 'Anomalies', tooltip: 'Anomalies', isAI: true },
     { href: '/asset-data-lake', icon: Database, label: 'Asset Data Lake', tooltip: 'Asset Data Lake' },
     { href: '/data-upload', icon: Upload, label: 'Data Upload', tooltip: 'Data Upload' },
-    { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment' },
+    { href: '/equipment', icon: Server, label: 'Equipment', tooltip: 'Equipment', isAI: true },
     { href: '/predictenance', icon: Wrench, label: 'Predictenance', tooltip: 'Predictenance', isAI: true },
   ];
 
