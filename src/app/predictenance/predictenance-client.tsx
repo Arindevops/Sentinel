@@ -118,14 +118,13 @@ export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
   );
 
   return (
-    <>
+    <TooltipProvider>
       <Card>
         <CardHeader>
           <CardTitle>All Predictenance Tasks</CardTitle>
           <CardDescription>A complete log of all scheduled and completed predictenance tasks.</CardDescription>
         </CardHeader>
         <CardContent>
-          <TooltipProvider>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -175,7 +174,6 @@ export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
                 ))}
               </TableBody>
             </Table>
-          </TooltipProvider>
         </CardContent>
       </Card>
 
@@ -271,6 +269,6 @@ export function PredictenanceClient({ tasks }: PredictenanceClientProps) {
           )}
         </DialogContent>
       </Dialog>
-    </>
+    </TooltipProvider>
   );
 }

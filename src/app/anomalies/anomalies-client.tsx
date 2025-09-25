@@ -115,14 +115,13 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
   );
 
   return (
-    <>
+    <TooltipProvider>
       <Card>
         <CardHeader>
           <CardTitle>Anomaly Log</CardTitle>
           <CardDescription>A complete log of all detected anomalies.</CardDescription>
         </CardHeader>
         <CardContent>
-          <TooltipProvider>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -166,7 +165,6 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
                 ))}
               </TableBody>
             </Table>
-          </TooltipProvider>
         </CardContent>
       </Card>
       
@@ -253,6 +251,6 @@ export function AnomaliesClient({ anomalies }: AnomaliesClientProps) {
           )}
         </DialogContent>
       </Dialog>
-    </>
+    </TooltipProvider>
   );
 }
