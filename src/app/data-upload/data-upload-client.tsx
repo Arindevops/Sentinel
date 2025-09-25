@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -7,11 +8,13 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { handleFileUpload } from '@/app/actions';
 import { Loader2, Upload, FileCheck2 } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export function DataUploadClient() {
   const [file, setFile] = React.useState<File | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [analysisResult, setAnalysisResult] = React.useState<string | null>(null);
+  const [category, setCategory] = React.useState<string | undefined>();
   const { toast } = useToast();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -32,6 +35,15 @@ export function DataUploadClient() {
       return;
     }
 
+    if (!category) {
+        toast({
+            variant: 'destructive',
+            title: 'No category selected',
+            description: 'Please select a data category.',
+        });
+        return;
+    }
+
     setIsLoading(true);
     setAnalysisResult(null);
 
@@ -39,12 +51,13 @@ export function DataUploadClient() {
     reader.readAsDataURL(file);
     reader.onload = async () => {
       const base64File = reader.result as string;
+      // TODO: Pass category to the handler when the API supports it.
       const result = await handleFileUpload(base64File);
       if (result.success) {
         setAnalysisResult(result.data.summary);
         toast({
           title: 'Analysis Complete',
-          description: 'AI-powered insights have been generated from your data.',
+          description: `AI-powered insights have been generated for your data in the "${category}" category.`,
         });
       } else {
         toast({
@@ -55,6 +68,7 @@ export function DataUploadClient() {
       }
       setIsLoading(false);
       setFile(null);
+      setCategory(undefined);
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -76,9 +90,20 @@ export function DataUploadClient() {
         <CardDescription>Upload equipment sensor data in Excel format for AI-powered analysis.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-4 sm:flex-row">
           <Input type="file" accept=".xlsx, .xls" onChange={handleFileChange} ref={fileInputRef} className="flex-grow"/>
-          <Button onClick={handleSubmit} disabled={isLoading || !file}>
+          <Select onValueChange={setCategory} value={category}>
+            <SelectTrigger className="sm:w-[280px]">
+                <SelectValue placeholder="Select data category..." />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="Sensor Data Info">Sensor Data Info</SelectItem>
+                <SelectItem value="Equipment maintenance history">Equipment maintenance history</SelectItem>
+                <SelectItem value="Previous incidents Assets">Previous incidents Assets</SelectItem>
+                <SelectItem value="Previous changes on Assets">Previous changes on Assets</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button onClick={handleSubmit} disabled={isLoading || !file || !category} className="sm:w-auto">
             {isLoading ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             ) : (
