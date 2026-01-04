@@ -7,7 +7,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {googleAI} from '@genkit-ai/googleai';
+import {googleAI} from '@genkit-ai/google-genai';
 import * as fs from 'fs';
 import { Readable } from 'stream';
 import type {MediaPart} from 'genkit';

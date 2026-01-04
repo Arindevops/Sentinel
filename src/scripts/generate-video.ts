@@ -4,7 +4,7 @@ config();
 
 import { generateVideoShowcaseFlow, downloadVideo } from '@/ai/flows/generate-video-showcase';
 import { genkit } from 'genkit';
-import { googleAI } from '@genkit-ai/googleai';
+import { googleAI } from '@genkit-ai/google-genai';
 
 // Initialize Genkit and required plugins for the script
 genkit({
